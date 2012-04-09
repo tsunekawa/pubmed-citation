@@ -1,3 +1,4 @@
 config/config.yml
 *.db
 Gemfile.lock
+*.log
