@@ -23,10 +23,12 @@ pubmed-citation is scripts that creates citation matrix between PubMed articles 
  $ gem install bundler
  $ bundle install
 
-config ディレクトリに config.yml を作成し、データセットが置かれているディレクトリパスを指定します。(データセットすべてを対象とするのは膨大な時間がかかるため、試しに実行する場合には少数のXMLファイルを入れたディレクトリを指定してください)
+config ディレクトリに config.yml を作成し、データセットのファイルパスを指定します。
+
+(データセットすべてを対象とするのは膨大な時間がかかるため、試しに実行する場合は少数のXMLファイルを指定してください)
 
  # config/config.yml
- datadir: "/var/opt/PubMedDataSet"
+ datadir: "/var/opt/PubMedDataSet/**/*"
 
 データベースのセットアップを行います。
 
