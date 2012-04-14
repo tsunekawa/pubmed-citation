@@ -1,6 +1,5 @@
 source :rubygems
 gem "rake"
-gem "redis-objects"
 gem "sqlite3-ruby"
 gem "activerecord"
 gem "libxml-ruby"
