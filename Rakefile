@@ -1,5 +1,12 @@
+require 'rspec/core'
+require 'rspec/core/rake_task'
 require './config/initializer'
 require 'logger'
+
+task :default => :spec
+
+desc "Run all specs in spec directory"
+RSpec::Core::RakeTask.new(:spec)
 
 desc "import article metadata from xml files"
 task :import do
