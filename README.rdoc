@@ -1,6 +1,6 @@
 = pubmed-citation
 
-{<img src="https://secure.travis-ci.org/kunimiya/pubmed-citation.png" />}[http://travis-ci.org/kunimiya/pubmed-citation]
+{<img src="https://secure.travis-ci.org/tsunekawa/pubmed-citation.png" />}[http://travis-ci.org/tsunekawa/pubmed-citation]
 
 * 制作者: 常川真央 < tsunekaw@slis.tsukuba.ac.jp >
 
