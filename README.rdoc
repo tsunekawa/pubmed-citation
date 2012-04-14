@@ -1,0 +1,45 @@
+= pubmed-citation
+
+{<img src="https://secure.travis-ci.org/kunimiya/pubmed-citation.png" />}[http://travis-ci.org/kunimiya/pubmed-citation]
+
+* 制作者: 常川真央 < tsunekaw@slis.tsukuba.ac.jp >
+
+pubmed-citation はXML形式で公開されているPubMed Centralの論文データセット( http://www.ncbi.nlm.nih.gov/pmc/tools/ftp/#XML_for_Data_Mining )から引用-被引用の行列を作成するためのスクリプトです。
+
+pubmed-citation is scripts that creates citation matrix between PubMed articles from PMC XML Dataset ( http://www.ncbi.nlm.nih.gov/pmc/tools/ftp/#XML_for_Data_Mining ).
+
+まだ開発途中のため、結果は不正確です。
+
+== 要件
+
+* Ruby1.9.3
+* LibXML
+* SQLite
+
+== 使用方法
+
+必要なライブラリをインストールします。
+
+ $ gem install bundler
+ $ bundle install
+
+config ディレクトリに config.yml を作成し、データセットが置かれているディレクトリパスを指定します。(データセットすべてを対象とするのは膨大な時間がかかるため、試しに実行する場合には少数のXMLファイルを入れたディレクトリを指定してください)
+
+ # config/config.yml
+ datadir: "/var/opt/PubMedDataSet"
+
+データベースのセットアップを行います。
+
+ $ rake db:migrate
+
+データセットのXMLファイルからデータベースに情報をインポートします。
+
+ $ rake import
+
+引用-被引用関係の行列をCSVファイルとしてエクスポートします。
+
+ $ rake export_csv
+
+== ライセンス
+
+pubmed-citation はMITライセンスです。
