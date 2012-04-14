@@ -28,7 +28,7 @@ config ディレクトリに config.yml を作成し、データセットのフ�
 (データセットすべてを対象とするのは膨大な時間がかかるため、試しに実行する場合は少数のXMLファイルを指定してください)
 
  # config/config.yml
- datadir: "/var/opt/PubMedDataSet/**/*"
+ filepath: "/var/opt/PubMedDataSet/**/*"
 
 データベースのセットアップを行います。
 
