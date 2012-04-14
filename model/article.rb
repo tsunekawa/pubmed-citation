@@ -1,7 +1,5 @@
 #-*- coding:utf-8 -*-
 
-require 'rexml/document'
-
 class Article < ActiveRecord::Base
   belongs_to :journal
 
@@ -15,20 +13,16 @@ class Article < ActiveRecord::Base
 
   # XMLファイルから情報をインポート
   def self.import_file(filename)
-    @source = ::REXML::Document.new(File.open(filename,"r"))
 
-    journal_tag  = @source.elements["/article/front/journal-meta/journal-id"].text
-    article_id  = @source.elements["/article/front/article-meta/article-id[@pub-id-type='pmid']"].text
-    references  = @source.get_elements("/article/back/ref-list/ref//pub-id[@pub-id-type='pmid']")
+    extractor = ::PubMed::Extractor.new(File.read(filename), :parser=>:libxml)
+    article = Article.find_by_pmid(extractor.article_id)
+    return article unless article.nil?
  
     ActiveRecord::Base::transaction do 
-      journal = Journal.find_or_create_by_tag journal_tag 
-      article = self.find_or_create_by_pmid article_id
-
-      # まだインポートされていないArticleに情報を保存する
-      article.journal = journal
-      references.each do |ref_id|
-        article.cites << Article.find_or_create_by_pmid(ref_id.text)
+      journal = Journal.find_or_create_by_tag extractor.journal_tag 
+      article = self.create :pmid => extractor.article_id, :journal => journal
+      extractor.references.each do |ref_id|
+        article.cites << Article.find_or_create_by_pmid(ref_id)
       end
       article.save
     end
@@ -37,3 +31,5 @@ class Article < ActiveRecord::Base
   end
 
 end
+
+
